@@ -1,38 +1,85 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Yeon+Sung&display=swap');
+body {
+  background-color: #f6f6f6;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  font-family: 'Nanum Pen Script';
+  /* 현재 웹 스크린의 실제 100%를 최소 높이로 갖겠다 */
+  min-height: 100vh; 
+  /* html 기본 마진 없애기 */
+  margin: 0;
+}
+.App {
+  padding : 20px;
+  font-size : 24px;
+  font-family: 'Nanum Pen Script', cursive;
+  font-family: 'Yeon Sung', cursive;
+}
+@media (min-width: 650px){
+  body { background-color: rgb(250, 194, 250);}
+}
+@media (max-width: 650px){
+ .App{width: 90vw;}
+}
+
+#root {
+  background-color: white;
+  box-shadow: rgba(100,100,111,0.2) 0 7px 29px 0;
+}
+
+.App {
+  min-height: 100vh;
+  padding: 0 20px;
+}
+/* MyButton */
+.MyButton {
+  background-color: blanchedalmond;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  padding: 15px;
+  font-size: 18px;
+  /* 버튼 안 글자가 잘려서 두 줄이 되지 않도록  */
+  white-space: nowrap;
+  font-family: "Nanum Pen Script";
+}
+.MyButton_default {
+ background-color: #ececec;
+ color: black;
+}
+.MyButton_positive {
+  background-color: #64c964;
   color: white;
+ }.MyButton_negative {
+  background-color: #fd565f;
+  color: white;
+ }
+
+ /* HEADER */
+ header{
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e2;
 }
 
-.App-link {
-  color: #61dafb;
+header > div {
+  display: flex;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+header .head_text { 
+  width: 50%;
+  font-size: 25px;
+  justify-content: center;
+}
+
+header .head_btn_left {
+  width: 25%;
+  justify-content: start;
+}
+
+header .head_btn_right {
+  width: 25%;
+  justify-content: end;
 }
