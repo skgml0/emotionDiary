@@ -56,7 +56,7 @@ const dummyDate =[{
 },
 {
   id: 4,
-  emotn: 4,
+  emotion: 4,
   content:"오늘의 일기 4번",
   date: 1659683159540
 },
@@ -70,7 +70,6 @@ const dummyDate =[{
 function App() {
   const [data, dispatch] = useReducer(reducer, dummyDate);
   const dataId = useRef(0);
-  console.log(new Date().getTime())
   // CREATE date : 언제 작성된 일기인지
   const onCreate = (date, content, emotion) => {
     dispatch({
@@ -105,7 +104,7 @@ function App() {
         <Routes>
           <Route path="/" element= {<Home />} />
           <Route path="/new" element= {<New />} />
-          <Route path="/edit" element= {<Edit />} />
+          <Route path="/edit/:id" element= {<Edit />} />
           <Route path="/diary/:id" element= {<Diary />} />
         </Routes>
         <RouteTest /> 
