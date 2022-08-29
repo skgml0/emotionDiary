@@ -10,10 +10,17 @@ const Home = () => {
     const [curDate, setCurDate] = useState(new Date());
     const headText = `${curDate.getFullYear()}년 ${curDate.getMonth()+ 1}월`
 
+    useEffect(()=>{
+        const titleElement = document.getElementsByTagName('title')[0];
+        titleElement.innerHTML = `감정일기장`
+    },[])
+    
+
     useEffect(() => {
         if (diaryList.length >=1){
         const firstDay = new Date(curDate.getFullYear(), curDate.getMonth(),1).getTime();
-        const lastDay = new Date(curDate.getFullYear(), curDate.getMonth() + 1, 0).getTime();
+        // 시간을 비교할 때 시,분,초 까지 비교한다. 마지막날은 말일의 시간 끝으로 설정해야 함
+        const lastDay = new Date(curDate.getFullYear(), curDate.getMonth() + 1, 0,23,59,59).getTime();
         setData(diaryList.filter((it) => firstDay <= it.date && it.date <= lastDay))
         // console.log(dataList);
     }else {setData([])}
@@ -26,12 +33,12 @@ const Home = () => {
 
     const increaseMonth = ()=> {
         setCurDate(
-            new Date(curDate.getFullYear(), curDate.getMonth()+1 , curDate.getDate())
+            new Date(curDate.getFullYear(), curDate.getMonth()+1 )
         )
     }
     const decreaseMonth = () => {
         setCurDate(
-            new Date(curDate.getFullYear(), curDate.getMonth()-1, curDate.getDate())
+            new Date(curDate.getFullYear(), curDate.getMonth()-1)
         )
     }
     return (

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {  useNavigate } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import MyButton from './MyButton';
 import DiaryItem from './DiaryItem';
 
@@ -12,12 +12,18 @@ const filterOptionList = [
     {value:"good", name: "좋은 감정만"},
     {value:"bad", name: "안좋은 감정만"},
 ]
-const ControlMenu = ({value, onChange, optionList}) => {
+// useCallback 함수재사용하도록만들지 않으면, 부모 컴포넌트 리렌더링되면서 변경이 되어 리액트메모가 정상적
+// 동작하지 않는다. 여기선 왜 멀쩡? - 
+// 여기서 onChange 는 useState가 반환하는 상태변환 
+// 동일한 id 보장 - 기본적으로 useCallback 처리가 되어서 나온다. 
+// 굳이 핸들러함수 만들필요없으면 당연히 재사용되는 상태변화함수 그대로 내려줘서 쓰면 컴포넌트 최적화를 쓸수 있다.
+const ControlMenu = React.memo(({value, onChange, optionList}) => {
     return (
     <select className="ControlMenu" value={value} onChange={(e)=> onChange(e.target.value)}>
-        {optionList.map((it,idx) => <option key={idx}>{it.name}</option>)}
+        {optionList.map((it,idx) => <option key={idx} value={it.value}>{it.name}</option>)}
     </select>)
-}
+});
+
 const DiaryList = ({diaryList}) => {
     const navigate = useNavigate();
     const [sortType,setSortType]=useState('latest');
@@ -26,8 +32,8 @@ const DiaryList = ({diaryList}) => {
     
     const getProcesseDiaryList = () => {
         const filterCallBack = (item) =>{ if (filter ==="good")
-        {return parseInt(item.emotion) <=3}
-         else {return parseInt(item.emotion)>3}}
+        {return parseInt(item.emotion) <=3;}
+         else {return parseInt(item.emotion)>3;}}
 
         const compare = (a,b) => {
             if (sortType === "latest") {
